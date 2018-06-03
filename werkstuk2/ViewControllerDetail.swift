@@ -53,7 +53,7 @@ class ViewControllerDetail: UIViewController {
             self.statusLabel.text = self.stop.status
             self.statusLabel.textColor = UIColor.red
         }
-        self.beschikbarePlaatsenLabel.text = String(self.stop.available_stands)
+        self.beschikbarePlaatsenLabel.text = String(self.stop.available_bike_stands)
         self.beschikbareFietsenLabel.text = String(self.stop.available_bikes)
     }
 
