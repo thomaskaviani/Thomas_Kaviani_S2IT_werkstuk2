@@ -46,6 +46,7 @@ class ViewController: UIViewController, MKMapViewDelegate {
         print("deletepins")
         deletePins()
         getData()
+        //showPinsMap()
         let time = DateFormatter.localizedString(from: NSDate() as Date, dateStyle: .short, timeStyle: .medium)
         updatelabel.text = time
     }
@@ -150,12 +151,59 @@ class ViewController: UIViewController, MKMapViewDelegate {
     }
     
     func deletePins(){
+        let allPins = self.map.annotations
+        self.map.removeAnnotations(allPins)
+        print("All pins deleted")
         
     }
     
     func deleteData(){
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate
+            else {
+                return
+        }
+        let context = appDelegate.persistentContainer.viewContext
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Stop")
+        request.returnsObjectsAsFaults = false
+        do {
+            let results = try context.fetch(request)
+            for obj in results {
+                let objData:NSManagedObject = obj as! NSManagedObject
+                context.delete(objData)
+            }
+        } catch let error as NSError {
+            print("Detele all data error: \(error) \(error.userInfo)")
+        }
         
     }
+    
+    internal func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        if annotation is MKUserLocation {
+            return nil
+        }
+        
+        let pin = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "pin")
+        pin.canShowCallout = true
+        pin.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+        return pin
+    }
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control:UIControl) {
+        let annView = view.annotation
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "detail") as! ViewControllerDetail
+        
+        for stop in villoStops {
+            if (stop.name == (annView?.title)!) {
+                vc.stop = stop
+            }
+        }
+        
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
