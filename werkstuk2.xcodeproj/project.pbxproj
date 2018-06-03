@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3C0E737920C44EFE00CE9EB4 /* ViewControllerDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0E737820C44EFE00CE9EB4 /* ViewControllerDetail.swift */; };
 		3C48C16920C1810E0032E988 /* VilloStop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C48C16820C1810E0032E988 /* VilloStop.swift */; };
 		3C48C16B20C1898A0032E988 /* Pin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C48C16A20C1898A0032E988 /* Pin.swift */; };
 		3CA04CD120C176CB000D4FAD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA04CD020C176CB000D4FAD /* AppDelegate.swift */; };
@@ -38,7 +37,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		3C0E737820C44EFE00CE9EB4 /* ViewControllerDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerDetail.swift; sourceTree = "<group>"; };
 		3C48C16820C1810E0032E988 /* VilloStop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VilloStop.swift; sourceTree = "<group>"; };
 		3C48C16A20C1898A0032E988 /* Pin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pin.swift; sourceTree = "<group>"; };
 		3CA04CCD20C176CB000D4FAD /* werkstuk2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = werkstuk2.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -114,7 +112,6 @@
 				3CA04CD720C176CB000D4FAD /* werkstuk2.xcdatamodeld */,
 				3C48C16820C1810E0032E988 /* VilloStop.swift */,
 				3C48C16A20C1898A0032E988 /* Pin.swift */,
-				3C0E737820C44EFE00CE9EB4 /* ViewControllerDetail.swift */,
 			);
 			path = werkstuk2;
 			sourceTree = "<group>";
@@ -272,7 +269,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C48C16B20C1898A0032E988 /* Pin.swift in Sources */,
-				3C0E737920C44EFE00CE9EB4 /* ViewControllerDetail.swift in Sources */,
 				3CA04CD320C176CB000D4FAD /* ViewController.swift in Sources */,
 				3CA04CD920C176CB000D4FAD /* werkstuk2.xcdatamodeld in Sources */,
 				3C48C16920C1810E0032E988 /* VilloStop.swift in Sources */,

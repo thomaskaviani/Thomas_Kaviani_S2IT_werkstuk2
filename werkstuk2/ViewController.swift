@@ -24,29 +24,30 @@ class ViewController: UIViewController, MKMapViewDelegate {
         refresh()
     }
     
+    @IBOutlet weak var adresLabel: UILabel!
+    @IBOutlet weak var fietsenVrijLabel: UILabel!
+    @IBOutlet weak var statusLabel: UILabel!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let radius: CLLocationDistance = 5000
-        let center = CLLocationCoordinate2D(latitude: 50.847413, longitude: 4.351266)
-        let region = MKCoordinateRegionMakeWithDistance(center, radius, radius)
-        self.map.setRegion(region, animated: true)
         
         refresh()
         
         manager.requestAlwaysAuthorization()
         manager.startUpdatingLocation()
+        map.showsUserLocation = true
         
     }
 
     func refresh(){
-        print("deletedata")
         deleteData()
         villoStops = []
-        print("deletepins")
         deletePins()
         getData()
-        //showPinsMap()
+        self.adresLabel.text = "Adres: "
+        self.fietsenVrijLabel.text = "Fietsen vrij: "
+        self.statusLabel.text = "Status: "
         let time = DateFormatter.localizedString(from: NSDate() as Date, dateStyle: .short, timeStyle: .medium)
         updatelabel.text = time
     }
@@ -68,9 +69,7 @@ class ViewController: UIViewController, MKMapViewDelegate {
         do {
             let stops = try context.fetch(request) as! [Stop]
             if (stops.count > 0) {
-                for villoStop in stops {
-                    self.villoStops.append(villoStop)
-                }
+                print("coredata is full")
             } else {
                 DispatchQueue.main.async {
                     let task = session.dataTask(with: url){
@@ -110,14 +109,12 @@ class ViewController: UIViewController, MKMapViewDelegate {
                             stop.lastUpdate = villoStop.lastUpdate!
                             stop.status = villoStop.status!
                             
-                            print("append stop")
                             self.villoStops.append(stop)
                         }
                         
                         do {
                             print("try context save")
                             try context.save()
-                            print("showPinsMap")
                             self.showPinsMap()
                         } catch {
                             fatalError("Error context error")
@@ -134,12 +131,8 @@ class ViewController: UIViewController, MKMapViewDelegate {
         
     }
     
-    
     func showPinsMap(){
-        print("show pins")
         for stop in villoStops {
-            print(stop.latitude)
-            print(stop.longitude)
             DispatchQueue.main.async {
                 let coordinate: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: stop.latitude, longitude: stop.longitude)
                 
@@ -150,10 +143,10 @@ class ViewController: UIViewController, MKMapViewDelegate {
         }
     }
     
+    
     func deletePins(){
         let allPins = self.map.annotations
         self.map.removeAnnotations(allPins)
-        print("All pins deleted")
         
     }
     
@@ -177,6 +170,7 @@ class ViewController: UIViewController, MKMapViewDelegate {
         
     }
     
+    
     internal func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         if annotation is MKUserLocation {
             return nil
@@ -188,19 +182,23 @@ class ViewController: UIViewController, MKMapViewDelegate {
         return pin
     }
     
-    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control:UIControl) {
-        let annView = view.annotation
+    func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
+        let center = CLLocationCoordinate2D(latitude: userLocation.coordinate.latitude, longitude: userLocation.coordinate.longitude)
+        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.025, longitudeDelta: 0.025))
         
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "detail") as! ViewControllerDetail
+        map.setRegion(region, animated: true)
+    }
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        let stop = view.annotation
         
-        for stop in villoStops {
-            if (stop.name == (annView?.title)!) {
-                vc.stop = stop
+        for currentStop in villoStops{
+            if(currentStop.name == (stop?.title)!){
+                self.adresLabel.text = "Adres: " + currentStop.address!
+                self.fietsenVrijLabel.text = "Fietsen vrij: " + String(currentStop.available_bikes)
+                self.statusLabel.text = "Status: " + currentStop.status!
             }
         }
-        
-        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     
