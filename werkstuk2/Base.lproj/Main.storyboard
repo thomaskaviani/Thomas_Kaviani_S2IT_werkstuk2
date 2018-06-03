@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" systemVersion="17A277" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_0" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -9,16 +14,89 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="werkstuk2" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="oir-Oa-wDR">
+                                <rect key="frame" x="0.0" y="82" width="320" height="486"/>
+                            </mapView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Laatste update:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rPh-s2-XZN">
+                                <rect key="frame" x="8" y="53" width="111" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="alc-SF-sXT"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20-01-1995 10:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="brE-3E-4yz">
+                                <rect key="frame" x="118" y="56" width="129" height="14"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OLa-h3-Z4R">
+                                <rect key="frame" x="247" y="48" width="73" height="30"/>
+                                <state key="normal" title="Refresh"/>
+                                <connections>
+                                    <action selector="refresh:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ItV-jq-GY3"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Villo Map" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="82P-o0-hkK">
+                                <rect key="frame" x="101" y="20" width="118" height="36"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="brE-3E-4yz" secondAttribute="trailing" constant="73" id="19D-Js-jPn"/>
+                            <constraint firstItem="oir-Oa-wDR" firstAttribute="top" secondItem="82P-o0-hkK" secondAttribute="bottom" constant="26" id="1ua-oK-Ii5"/>
+                            <constraint firstItem="rPh-s2-XZN" firstAttribute="baseline" secondItem="brE-3E-4yz" secondAttribute="baseline" constant="4" id="5v7-19-Qdy"/>
+                            <constraint firstItem="rPh-s2-XZN" firstAttribute="firstBaseline" secondItem="brE-3E-4yz" secondAttribute="firstBaseline" constant="-3" id="6Ho-m8-8Xh"/>
+                            <constraint firstItem="OLa-h3-Z4R" firstAttribute="trailing" secondItem="oir-Oa-wDR" secondAttribute="trailing" id="7GJ-qw-nXa"/>
+                            <constraint firstAttribute="trailing" secondItem="oir-Oa-wDR" secondAttribute="trailing" id="8Dd-Xn-xim"/>
+                            <constraint firstItem="oir-Oa-wDR" firstAttribute="top" secondItem="rPh-s2-XZN" secondAttribute="bottom" constant="8" symbolic="YES" id="8Ff-4n-hG1"/>
+                            <constraint firstItem="rPh-s2-XZN" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="A2o-ol-uhV"/>
+                            <constraint firstItem="OLa-h3-Z4R" firstAttribute="centerY" secondItem="brE-3E-4yz" secondAttribute="centerY" id="ECZ-xd-ohf"/>
+                            <constraint firstItem="rPh-s2-XZN" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="33" id="Jdc-u0-TeK"/>
+                            <constraint firstItem="82P-o0-hkK" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="101" id="Jw7-6V-8II"/>
+                            <constraint firstItem="82P-o0-hkK" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="MJP-no-Opg"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="rPh-s2-XZN" secondAttribute="trailing" constant="201" id="WW8-6N-3sA"/>
+                            <constraint firstItem="brE-3E-4yz" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="118" id="WlB-IW-teg"/>
+                            <constraint firstItem="oir-Oa-wDR" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="abq-PO-NW6"/>
+                            <constraint firstItem="OLa-h3-Z4R" firstAttribute="leading" secondItem="brE-3E-4yz" secondAttribute="trailing" id="biB-66-yFJ"/>
+                            <constraint firstItem="oir-Oa-wDR" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="fVi-cY-cdZ"/>
+                            <constraint firstItem="82P-o0-hkK" firstAttribute="centerX" secondItem="oir-Oa-wDR" secondAttribute="centerX" id="zsh-XZ-bj1"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="map" destination="oir-Oa-wDR" id="xAB-3t-TAb"/>
+                        <outlet property="updatelabel" destination="brE-3E-4yz" id="3Hy-uo-kBh"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="114.375" y="117.25352112676056"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="qSg-K3-Ca6">
+            <objects>
+                <viewController id="bRH-5f-qZR" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="1Sa-fM-6M1">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <viewLayoutGuide key="safeArea" id="7zX-12-uN3"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Lb8-Hv-62i" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="946" y="118"/>
         </scene>
     </scenes>
 </document>
